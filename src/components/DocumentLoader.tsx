@@ -42,17 +42,21 @@ const DocumentLoader = ({
           <p className="text-xs uppercase tracking-[0.28em] text-slate-300">Document</p>
           <h3 className="text-lg font-semibold text-white">Paste your text or upload a PDF/EPUB</h3>
         </div>
-        <button
-          onClick={onSave}
-          disabled={!canSave}
-          className={`rounded-full px-4 py-2 text-sm font-semibold shadow-lg transition hover:-translate-y-0.5 ${
-            canSave
-              ? 'bg-white/90 text-ink hover:bg-white'
-              : 'cursor-not-allowed bg-white/40 text-slate-700'
-          }`}
-        >
-          Save to Library
-        </button>
+        <div>
+          <label
+            htmlFor="pdf-upload"
+            className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:border-white/60 hover:bg-white/20"
+          >
+            Upload PDF/EPUB
+          </label>
+          <input
+            id="pdf-upload"
+            type="file"
+            accept=".pdf,application/pdf,.epub,application/epub+zip"
+            className="hidden"
+            onChange={(e) => handleFiles(e.target.files)}
+          />
+        </div>
       </div>
 
       <div className="mt-4 space-y-3">
@@ -86,20 +90,18 @@ const DocumentLoader = ({
           aria-label="Paste your text or upload a PDF or EPUB"
         />
         <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-slate-300">
-          <label
-            htmlFor="pdf-upload"
-            className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 font-semibold text-white transition hover:border-white/60 hover:bg-white/20"
+          <button
+            onClick={onSave}
+            disabled={!canSave}
+            className={`rounded-full px-4 py-2 text-sm font-semibold shadow-lg transition hover:-translate-y-0.5 ${
+              canSave
+                ? 'bg-white/90 text-ink hover:bg-white'
+                : 'cursor-not-allowed bg-white/40 text-slate-700'
+            }`}
           >
-            Upload PDF/EPUB
-          </label>
+            Save to Library
+          </button>
           <span className="text-slate-400">or drop a PDF/EPUB to load</span>
-          <input
-            id="pdf-upload"
-            type="file"
-            accept=".pdf,application/pdf,.epub,application/epub+zip"
-            className="hidden"
-            onChange={(e) => handleFiles(e.target.files)}
-          />
         </div>
       </div>
 
