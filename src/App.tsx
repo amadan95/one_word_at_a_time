@@ -116,7 +116,6 @@ const App = () => {
   }
 
   const handlePdfSelected = async (file: File) => {
-    setTitle(fileNameToTitle(file.name))
     setFileStatus({
       state: 'loading',
       message: 'Extracting text…',
@@ -175,7 +174,6 @@ const App = () => {
   }
 
   const handleEpubSelected = async (file: File) => {
-    setTitle(fileNameToTitle(file.name))
     setFileStatus({
       state: 'loading',
       message: 'Extracting EPUB…',
@@ -236,6 +234,7 @@ const App = () => {
   }
 
   const handleFileSelected = (file: File) => {
+    setTitle(fileNameToTitle(file.name))
     const lower = file.name.toLowerCase()
     const isPdf = file.type === 'application/pdf' || lower.endsWith('.pdf')
     const isEpub = file.type === 'application/epub+zip' || lower.endsWith('.epub')
