@@ -22,13 +22,11 @@ const FocusView = ({
   return (
     <div
       ref={containerRef}
-      className={`relative overflow-hidden rounded-3xl border border-white/10 shadow-card backdrop-blur ${
-        isFullscreen
-          ? 'min-h-screen bg-gradient-to-br from-[#0e1224] via-[#101736] to-[#0c1026]'
-          : 'bg-gradient-to-br from-white/10 via-white/5 to-white/0'
+      className={`glass-panel relative overflow-hidden ${
+        isFullscreen ? 'min-h-screen focus-fullscreen' : ''
       }`}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,77,77,0.14),transparent_40%),radial-gradient(circle_at_80%_0%,rgba(255,255,255,0.08),transparent_35%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,77,77,0.18),transparent_45%),radial-gradient(circle_at_80%_0%,rgba(255,255,255,0.12),transparent_40%)]" />
       <div
         className={`relative flex flex-col ${
           isFullscreen ? 'min-h-screen' : 'min-h-[320px] md:min-h-[360px]'
@@ -60,13 +58,13 @@ const FocusView = ({
       {isFullscreen && (
         <div className="absolute inset-x-0 bottom-6 flex justify-center gap-3">
           <button
-            className="rounded-full bg-white/90 px-6 py-2 text-sm font-semibold text-ink shadow-lg transition hover:-translate-y-0.5 hover:bg-white"
+            className="glass-button glass-button-primary gesture-press px-6"
             onClick={onTogglePlay}
           >
             {isPlaying ? 'Pause' : 'Play'}
           </button>
           <button
-            className="rounded-full border border-white/40 bg-white/10 px-4 py-2 text-sm font-semibold text-white backdrop-blur transition hover:border-white/70 hover:bg-white/20"
+            className="glass-button gesture-press hover:border-white/70 hover:bg-white/20"
             onClick={onExitFullscreen}
           >
             Exit Fullscreen
