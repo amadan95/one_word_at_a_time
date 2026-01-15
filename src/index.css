@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #0b132b;
+  background-color: #0e1224;
+}
+
+body {
+  @apply min-h-screen bg-gradient-to-br from-[#0e1224] via-[#101736] to-[#0c1026] text-white antialiased;
+}
+
+#root {
+  @apply min-h-screen;
+}
+
+::selection {
+  background: #ff4d4d;
+  color: white;
+}
