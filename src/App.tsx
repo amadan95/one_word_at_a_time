@@ -16,6 +16,13 @@ import { tokenize } from './utils/tokenize'
 
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max)
 
+const fileNameToTitle = (fileName: string) => {
+  const trimmed = fileName.trim()
+  if (!trimmed) return 'Untitled document'
+  const withoutExt = trimmed.replace(/\.[^.]+$/, '')
+  return withoutExt || trimmed
+}
+
 const App = () => {
   const [title, setTitle] = useState('Untitled document')
   const [rawText, setRawText] = useState('')
@@ -109,6 +116,7 @@ const App = () => {
   }
 
   const handlePdfSelected = async (file: File) => {
+    setTitle(fileNameToTitle(file.name))
     setFileStatus({
       state: 'loading',
       message: 'Extracting text…',
@@ -167,6 +175,7 @@ const App = () => {
   }
 
   const handleEpubSelected = async (file: File) => {
+    setTitle(fileNameToTitle(file.name))
     setFileStatus({
       state: 'loading',
       message: 'Extracting EPUB…',
