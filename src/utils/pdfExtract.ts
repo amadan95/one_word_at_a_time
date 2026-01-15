@@ -18,17 +18,61 @@ export type PdfProgressCallback = (current: number, total: number) => void
 const isTextItem = (item: TextItem | TextMarkedContent): item is TextItem =>
   'str' in item
 
+const buildLineText = (items: TextItem[]) => {
+  const sorted = [...items].sort((a, b) => a.transform[4] - b.transform[4])
+  let line = ''
+  let prevX: number | null = null
+  let prevWidth = 0
+  let prevLen = 0
+
+  for (const item of sorted) {
+    const raw = item.str
+    const text = raw.replace(/\s+/g, ' ')
+    if (!text) continue
+
+    const x = item.transform[4]
+    const width = item.width ?? 0
+
+    if (prevX !== null) {
+      const gap = x - (prevX + prevWidth)
+      const avgCharWidth = prevLen ? prevWidth / prevLen : 3
+      const gapThreshold = Math.max(1.5, avgCharWidth * 0.6)
+      if (gap > gapThreshold && !line.endsWith(' ')) {
+        line += ' '
+      }
+    }
+
+    line += text
+    prevX = x
+    prevWidth = width
+    prevLen = text.length
+  }
+
+  return line.replace(/\s+/g, ' ').trim()
+}
+
 const extractTextFromPage = async (
   pdf: PDFDocumentProxy,
   pageNumber: number,
 ): Promise<string> => {
   const page = await pdf.getPage(pageNumber)
   const content = await page.getTextContent()
-  return content.items
-    .map((item) => (isTextItem(item) ? item.str : ''))
-    .join(' ')
-    .replace(/\s+/g, ' ')
-    .trim()
+  const textItems = content.items.filter(isTextItem)
+
+  const lines = new Map<number, TextItem[]>()
+  for (const item of textItems) {
+    const y = item.transform[5]
+    const key = Math.round(y / 3)
+    if (!lines.has(key)) lines.set(key, [])
+    lines.get(key)?.push(item)
+  }
+
+  const orderedKeys = Array.from(lines.keys()).sort((a, b) => b - a)
+  const outputLines = orderedKeys
+    .map((key) => buildLineText(lines.get(key) ?? []))
+    .filter((line) => line.length > 0)
+
+  return outputLines.join('\n')
 }
 
 export const extractTextFromPdf = async (

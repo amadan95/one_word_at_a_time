@@ -36,7 +36,7 @@ const DocumentLoader = ({
   }
 
   return (
-    <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-card backdrop-blur">
+    <div className="glass-panel liquid-sheen p-6">
       <div className="flex items-center justify-between gap-3">
         <div>
           <p className="text-xs uppercase tracking-[0.28em] text-slate-300">Document</p>
@@ -45,7 +45,7 @@ const DocumentLoader = ({
         <div>
           <label
             htmlFor="pdf-upload"
-            className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:border-white/60 hover:bg-white/20"
+            className="glass-button gesture-press cursor-pointer justify-center text-center hover:border-white/60 hover:bg-white/20"
           >
             Upload PDF/EPUB
           </label>
@@ -68,7 +68,7 @@ const DocumentLoader = ({
           type="text"
           value={title}
           onChange={(e) => onTitleChange(e.target.value)}
-          className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-white outline-none transition focus:border-accent"
+          className="w-full rounded-2xl border border-white/20 bg-white/10 px-4 py-3 text-white outline-none transition focus:border-accent"
           placeholder="e.g. Learning sprint notes"
         />
       </div>
@@ -85,7 +85,7 @@ const DocumentLoader = ({
           onDrop={handleDrop}
           placeholder="Paste your text or drop a PDF/EPUB file here"
           className={`h-40 w-full rounded-2xl border px-4 py-3 text-white outline-none transition focus:border-accent ${
-            isDragActive ? 'border-accent/70 bg-white/10' : 'border-white/10 bg-white/5'
+            isDragActive ? 'border-accent/70 bg-white/15' : 'border-white/15 bg-white/5'
           }`}
           aria-label="Paste your text or upload a PDF or EPUB"
         />
@@ -93,11 +93,7 @@ const DocumentLoader = ({
           <button
             onClick={onSave}
             disabled={!canSave}
-            className={`rounded-full px-4 py-2 text-sm font-semibold shadow-lg transition hover:-translate-y-0.5 ${
-              canSave
-                ? 'bg-white/90 text-ink hover:bg-white'
-                : 'cursor-not-allowed bg-white/40 text-slate-700'
-            }`}
+            className="glass-button glass-button-primary gesture-press px-4"
           >
             Save to Library
           </button>
@@ -105,7 +101,7 @@ const DocumentLoader = ({
         </div>
       </div>
 
-      <div className="mt-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-200">
+      <div className="glass-panel-soft liquid-sheen mt-3 px-4 py-3 text-sm text-slate-200">
         {fileStatus.state === 'idle' && <span>No PDF/EPUB loaded</span>}
         {fileStatus.state === 'loading' && (
           <span className="text-amber-200">{fileStatus.progressLabel ?? 'Extracting text…'}</span>
