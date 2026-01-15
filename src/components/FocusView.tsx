@@ -22,8 +22,10 @@ const FocusView = ({
   return (
     <div
       ref={containerRef}
-      className={`relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 via-white/5 to-white/0 shadow-card backdrop-blur ${
-        isFullscreen ? 'min-h-screen' : ''
+      className={`relative overflow-hidden rounded-3xl border border-white/10 shadow-card backdrop-blur ${
+        isFullscreen
+          ? 'min-h-screen bg-gradient-to-br from-[#0e1224] via-[#101736] to-[#0c1026]'
+          : 'bg-gradient-to-br from-white/10 via-white/5 to-white/0'
       }`}
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,77,77,0.14),transparent_40%),radial-gradient(circle_at_80%_0%,rgba(255,255,255,0.08),transparent_35%)]" />
