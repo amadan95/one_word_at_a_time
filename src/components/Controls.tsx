@@ -20,7 +20,7 @@ const Controls = ({
   isFullscreen,
 }: ControlsProps) => {
   return (
-    <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-card backdrop-blur">
+    <div className="glass-panel liquid-sheen p-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <p className="text-xs uppercase tracking-[0.28em] text-slate-300">Auto pace</p>
@@ -28,7 +28,7 @@ const Controls = ({
         </div>
         <button
           onClick={onFullscreenToggle}
-          className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:border-white/60 hover:bg-white/20"
+          className="glass-button gesture-press hover:border-white/60 hover:bg-white/20"
           aria-label="Toggle fullscreen"
         >
           {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
@@ -38,13 +38,13 @@ const Controls = ({
       <div className="mt-4 flex flex-wrap gap-3">
         <button
           onClick={isPlaying ? onPause : onStart}
-          className="rounded-full bg-accent px-5 py-2 text-sm font-semibold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-[#ff6b6b]"
+          className="glass-button gesture-press bg-accent px-5 text-white shadow-lg hover:bg-[#ff6b6b]"
         >
           {isPlaying ? 'Pause' : 'Start'}
         </button>
         <button
           onClick={onReset}
-          className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:border-white/60 hover:bg-white/20"
+          className="glass-button gesture-press hover:border-white/60 hover:bg-white/20"
         >
           Restart
         </button>

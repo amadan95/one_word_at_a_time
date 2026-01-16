@@ -6,6 +6,8 @@ interface FocusViewProps {
   isPlaying: boolean
   isFullscreen: boolean
   containerRef: RefObject<HTMLDivElement | null>
+  wpm: number
+  onChangeWpm: (value: number) => void
   onTogglePlay: () => void
   onExitFullscreen: () => void
 }
@@ -16,6 +18,8 @@ const FocusView = ({
   isPlaying,
   isFullscreen,
   containerRef,
+  wpm,
+  onChangeWpm,
   onTogglePlay,
   onExitFullscreen,
 }: FocusViewProps) => {
@@ -26,7 +30,7 @@ const FocusView = ({
         isFullscreen ? 'min-h-screen focus-fullscreen' : ''
       }`}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,77,77,0.18),transparent_45%),radial-gradient(circle_at_80%_0%,rgba(255,255,255,0.12),transparent_40%)]" />
+      <div className="absolute inset-0 liquid-glass" />
       <div
         className={`relative flex flex-col ${
           isFullscreen ? 'min-h-screen' : 'min-h-[320px] md:min-h-[360px]'
@@ -56,19 +60,41 @@ const FocusView = ({
       </div>
 
       {isFullscreen && (
-        <div className="absolute inset-x-0 bottom-6 flex justify-center gap-3">
-          <button
-            className="glass-button glass-button-primary gesture-press px-6"
-            onClick={onTogglePlay}
-          >
-            {isPlaying ? 'Pause' : 'Play'}
-          </button>
-          <button
-            className="glass-button gesture-press hover:border-white/70 hover:bg-white/20"
-            onClick={onExitFullscreen}
-          >
-            Exit Fullscreen
-          </button>
+        <div className="absolute inset-x-6 bottom-6 flex flex-col gap-3 md:inset-x-10">
+          <div className="glass-panel-soft liquid-sheen flex flex-col items-center gap-4 px-4 py-3">
+            <div className="flex items-center justify-center gap-3">
+              <button
+                className="glass-button glass-button-primary gesture-press px-6"
+                onClick={onTogglePlay}
+              >
+                {isPlaying ? 'Pause' : 'Play'}
+              </button>
+              <button
+                className="glass-button gesture-press hover:border-white/70 hover:bg-white/20"
+                onClick={onExitFullscreen}
+              >
+                Exit Fullscreen
+              </button>
+            </div>
+
+            <div className="w-full max-w-[260px]">
+              <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.2em] text-slate-300">
+                <span>120</span>
+                <span className="text-xs">{wpm} WPM</span>
+                <span>900</span>
+              </div>
+              <input
+                type="range"
+                min={120}
+                max={900}
+                step={10}
+                value={wpm}
+                onChange={(e) => onChangeWpm(Number(e.target.value))}
+                className="mt-2 w-full accent-accent"
+                aria-label="Words per minute"
+              />
+            </div>
+          </div>
         </div>
       )}
     </div>

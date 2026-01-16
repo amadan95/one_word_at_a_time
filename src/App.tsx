@@ -336,6 +336,8 @@ const App = () => {
                 wordParts={wordParts}
                 isPlaying={isPlaying}
                 isFullscreen={isFullscreen}
+                wpm={wpm}
+                onChangeWpm={handleWpmChange}
                 onTogglePlay={togglePlay}
                 onExitFullscreen={exitFullscreen}
               />

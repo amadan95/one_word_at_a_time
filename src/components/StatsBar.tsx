@@ -4,7 +4,7 @@ interface StatsBarProps {
 }
 
 const StatCard = ({ label, value }: { label: string; value: string }) => (
-  <div className="flex flex-col rounded-2xl border border-white/10 bg-white/5 px-4 py-3 shadow-card backdrop-blur">
+  <div className="glass-panel-soft liquid-sheen gesture-float flex flex-col px-4 py-3">
     <span className="text-xs uppercase tracking-wide text-slate-300">{label}</span>
     <span className="text-2xl font-semibold text-white">{value}</span>
   </div>

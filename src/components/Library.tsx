@@ -16,7 +16,7 @@ const formatDate = (timestamp: number) =>
 
 const Library = ({ library, onLoad, onClear }: LibraryProps) => {
   return (
-    <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-card backdrop-blur">
+    <div className="glass-panel liquid-sheen p-6">
       <div className="mb-4 flex items-center justify-between">
         <div>
           <p className="text-xs uppercase tracking-[0.28em] text-slate-300">Library</p>
@@ -24,7 +24,7 @@ const Library = ({ library, onLoad, onClear }: LibraryProps) => {
         </div>
         <button
           onClick={onClear}
-          className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:border-white/60 hover:bg-white/20"
+          className="glass-button gesture-press hover:border-white/60 hover:bg-white/20"
         >
           Clear
         </button>
@@ -37,7 +37,7 @@ const Library = ({ library, onLoad, onClear }: LibraryProps) => {
           {library.map((doc) => (
             <li key={doc.id}>
               <button
-                className="flex w-full flex-col gap-1 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-left text-white transition hover:border-white/40 hover:bg-white/10"
+                className="glass-panel-soft gesture-float flex w-full flex-col gap-1 px-4 py-3 text-left text-white"
                 onClick={() => onLoad(doc)}
               >
                 <div className="flex items-center justify-between gap-2">
